@@ -13,13 +13,12 @@ COPY go.sum .
 RUN go mod download
 
 
-# Build the application
 RUN go build -o main .
 
 WORKDIR /src
 
-RUN cp /build/main .
+RUN cp /src/main .
 
-EXPOSE 3000
+EXPOSE 8000
 
 CMD ["/src/main"]

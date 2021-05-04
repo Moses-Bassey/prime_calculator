@@ -64,13 +64,14 @@ func prime_handler(w http.ResponseWriter, r *http.Request){
 
     result := ResJson{pc}
 
-    res, err := json.Marshal(result)
+    js, err := json.Marshal(result)
   	if err != nil {
     	http.Error(w, err.Error(), http.StatusInternalServerError)
     	return
   	}
-   	w.Header().Set("Content-Type", "application/json")
-  	w.Write(res)
+    w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
+    // fmt.Fprintf(w, strconv.Itoa(prime_calc(2, intVar)))
 }
 
 func main(){

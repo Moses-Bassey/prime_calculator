@@ -5,6 +5,8 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 	<style type="text/css">
 		.center{
 			text-align: center;
@@ -48,7 +50,7 @@
 				</div>
 				<div style="border-radius: 10px; background-color: white; padding: 30px; padding-bottom: 50px; margin: 20px; width: 100%;">
 					<div>
-						<h3 style="font-family: arial">Server Prime Calculator</h3>
+						<h3 style="font-family: arial">Server Prime Calculator </h3>
 					</div>
 					<div>
 						<div style="display: inline-flex; width: 100%">
@@ -90,22 +92,15 @@
 				document.getElementById('result1').innerHTML=nearestPrime(numberInput)
 			}
 
-			function calculatePrime(){
+			async function calculatePrime(){
 				var numberInput = document.getElementById('numberInput2').value;
 				if(numberInput == null || undefined)
 					return;
-				fetch(window.location.href+'prime_handler?input='+numberInput, {
-					method: "POST",
-					headers: {
-						'Accept': 'application/json',
-          				'Content-Type': 'application/json'
-					}
-				}).then(data => {
-					console.log(data)
-					document.getElementById('result2').innerHTML=data
-				}, err => {
-					console.log(err)
-				});
+
+				$.get(window.location.href+'prime_handler?input='+numberInput, function(data, status){
+				    console.log(data)
+				    document.getElementById('result2').innerHTML=data.Result
+				  });
 			}
 		</script>
 	</body>
